@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { fetchGenres } from '../lib/data';
 import Genres from './genres';
 import NavLinks from './nav-links';
 
 export default function Sidenav() {
   return (
-    <nav className="fixed inset-0 w-60 border-r">
-      <div className="flex h-full flex-col">
-        <div className="p-4 text-center text-2xl font-bold">
+    <nav className="w-72 shrink-0 border-r">
+      <div className="fixed inset-0 flex w-72 flex-col">
+        <div className="p-4 text-2xl font-bold">
           <Link href="/">TMDB Discovery</Link>
         </div>
         <hr />
@@ -27,7 +28,7 @@ export default function Sidenav() {
               src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg"
               alt="TMDB logo"
               width={80}
-              height={0}
+              height={30}
             />
           </Link>
           <p className="pt-2 text-center">

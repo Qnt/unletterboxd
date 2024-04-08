@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import clsx from 'clsx';
 import { LinkType } from '../lib/types';
 
 const links: LinkType[] = [
@@ -15,9 +16,14 @@ export default function NavLinks() {
   return (
     <ul>
       {links.map((link) => (
-        <li key={link.name} className="hover:bg-accent text-accent-foreground">
-          <Link href="/movies/popular" className="block px-4 py-2">
-            Popular
+        <li
+          key={link.name}
+          className={clsx('text-accent-foreground hover:bg-accent', {
+            'bg-accent': pathname === link.href,
+          })}
+        >
+          <Link href={link.href} className="block px-4 py-2">
+            {link.name}
           </Link>
         </li>
       ))}

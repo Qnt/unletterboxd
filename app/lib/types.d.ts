@@ -15,3 +15,6 @@ export type LinkType = {
   name: string;
   href: string;
 };
+
+export type MoviesDiscoverQuery =
+  operations['discover-movie']['parameters']['query'];

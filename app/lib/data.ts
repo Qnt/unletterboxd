@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import createClient from 'openapi-fetch';
 import type { paths } from './schema';
+import { MoviesDiscoverQuery } from './types';
 
 const MAIN_BASE_URL = 'https://api.themoviedb.org/';
 
@@ -13,9 +14,34 @@ const options = {
 
 const client = createClient<paths>({ baseUrl: MAIN_BASE_URL, ...options });
 
-export const fetchMovies = async () => {
+export const fetchMoviesPopular = async () => {
   try {
     const { data, error } = await client.GET('/3/movie/popular');
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch data');
+  }
+};
+
+export const fetchMoviesTopRated = async () => {
+  try {
+    const { data, error } = await client.GET('/3/movie/top_rated');
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch data');
+  }
+};
+
+export const fetchMoviesDiscover = async (searchParams: URLSearchParams) => {
+  try {
+    console.log(searchParams);
+    const { data, error } = await client.GET('/3/discover/movie', {
+      params: {
+        query: searchParams as MoviesDiscoverQuery,
+      },
+    });
     return data;
   } catch (error) {
     console.error(error);
