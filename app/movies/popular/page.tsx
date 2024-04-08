@@ -1,10 +1,10 @@
-import MovieCard from './components/movie-card';
-import { fetchMovies } from './lib/data';
+import MovieCard from '@/app/components/movie-card';
+import { fetchMovies } from '@/app/lib/data';
 
 export default async function Home() {
   const movies = await fetchMovies();
   return (
-    <main className="h-full w-full pl-60">
+    <main className="w-full">
       <section className=" flex w-full flex-col gap-4 p-4">
         <p className="text-2xl font-bold">Popular Movies</p>
         <ul className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-3">
