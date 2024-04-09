@@ -7,17 +7,18 @@ import { Card } from './ui/card';
 const MovieCard = async ({ movie }: { movie: Movie }) => {
   return (
     <Card className="flex h-full w-full flex-col overflow-hidden shadow-md transition ease-in-out hover:-translate-y-1 hover:bg-accent">
-      <Link href="#" className="cursor-pointer">
+      <Link href={`/movies/${movie.id}`} className="cursor-pointer">
         <Image
-          src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+          src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
           width={500}
-          height={200}
+          height={500}
           alt={movie?.title ?? 'Movie title'}
+          priority={true}
         />
       </Link>
       <div className="flex grow flex-col px-2 py-1">
         <Link
-          href="#"
+          href={`/movies/${movie.id}`}
           className="w-fit cursor-pointer text-base font-bold hover:text-blue-600"
         >
           {movie.title}

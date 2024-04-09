@@ -76,11 +76,29 @@ export const fetchConfigDetails = async () => {
   }
 };
 
-export const fetchMovieDeetails = async (id: Movie['id']) => {
+export const fetchMovieDetails = async (id: Movie['id']) => {
   try {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const { data, error } = await client.GET('/3/movie/{movie_id}', {
+      params: {
+        path: {
+          movie_id: id,
+        },
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch data');
+  }
+};
+
+export const fetchMovieCredits = async (id: Movie['id']) => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const { data, error } = await client.GET('/3/movie/{movie_id}/credits', {
       params: {
         path: {
           movie_id: id,
