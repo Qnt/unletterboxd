@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { fetchGenres } from '../lib/data';
+import { Suspense } from 'react';
 import Genres from './genres';
 import NavLinks from './nav-links';
 
@@ -21,14 +21,16 @@ export default function Sidenav() {
         <div className="px-4 py-2">
           <h3 className="text-lg">Genres</h3>
         </div>
-        <Genres />
+        <Suspense fallback={<p>Loading</p>}>
+          <Genres />
+        </Suspense>
         <div className="flex flex-col items-center px-4 pb-4 pt-8">
           <Link href="https://www.themoviedb.org">
             <Image
               src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg"
               alt="TMDB logo"
-              width={80}
-              height={30}
+              width={100}
+              height={40}
             />
           </Link>
           <p className="pt-2 text-center">

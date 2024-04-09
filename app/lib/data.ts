@@ -16,6 +16,8 @@ const client = createClient<paths>({ baseUrl: MAIN_BASE_URL, ...options });
 
 export const fetchMoviesPopular = async () => {
   try {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const { data, error } = await client.GET('/3/movie/popular');
     return data;
   } catch (error) {
@@ -26,6 +28,8 @@ export const fetchMoviesPopular = async () => {
 
 export const fetchMoviesTopRated = async () => {
   try {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const { data, error } = await client.GET('/3/movie/top_rated');
     return data;
   } catch (error) {
@@ -34,12 +38,15 @@ export const fetchMoviesTopRated = async () => {
   }
 };
 
-export const fetchMoviesDiscover = async (searchParams: URLSearchParams) => {
+export const fetchMoviesDiscover = async (
+  searchParams: MoviesDiscoverQuery,
+) => {
   try {
-    console.log(searchParams);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const { data, error } = await client.GET('/3/discover/movie', {
       params: {
-        query: searchParams as MoviesDiscoverQuery,
+        query: searchParams,
       },
     });
     return data;
@@ -68,25 +75,3 @@ export const fetchConfigDetails = async () => {
     throw new Error('Failed to fetch configuration data');
   }
 };
-
-// export const fetchImage = async (
-//   size: BackdropSize | PosterSize | LogoSize | ProfileSize | StillSize,
-//   path: string,
-// ) => {
-//   try {
-//     const url = new URL(`${size}/${path}`, IMAGE_BASE_URL);
-//     const res = await fetch(url, options);
-//     if (!res.ok) {
-//       throw new Error();
-//     }
-//     const data = res.json();
-//     return data;
-//   } catch (error) {
-//     console.error(error);
-//     throw new Error('Failed to fetch image');
-//   }
-// };
-
-// export const fetchPoster = async (size: PosterSize, path: string) => {
-//   return await fetchImage(size, path);
-// };

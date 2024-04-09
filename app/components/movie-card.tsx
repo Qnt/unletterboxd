@@ -9,7 +9,7 @@ const MovieCard = async ({ movie }: { movie: Movie }) => {
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
           width={500}
-          height={0}
+          height={200}
           alt={movie?.title ?? 'Movie title'}
         />
       </div>
