@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import createClient from 'openapi-fetch';
 import type { paths } from './schema';
-import { MoviesDiscoverQuery } from './types';
+import { Movie, MoviesDiscoverQuery } from './types';
 
 const MAIN_BASE_URL = 'https://api.themoviedb.org/';
 
@@ -73,5 +73,23 @@ export const fetchConfigDetails = async () => {
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch configuration data');
+  }
+};
+
+export const fetchMovieDeetails = async (id: Movie['id']) => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const { data, error } = await client.GET('/3/movie/{movie_id}', {
+      params: {
+        path: {
+          movie_id: id,
+        },
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch data');
   }
 };
