@@ -1,3 +1,4 @@
+import tmdbLogo from '@/public/Tmdb.new.logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -26,16 +27,11 @@ export default function Sidenav() {
         <Suspense fallback={<p>Loading</p>}>
           <Genres />
         </Suspense>
-        <div className="flex flex-col items-center px-4 pb-4 pt-8">
+        <div className="flex items-center gap-4 px-4 pb-4 pt-8">
           <Link href="https://www.themoviedb.org">
-            <Image
-              src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg"
-              alt="TMDB logo"
-              width={100}
-              height={40}
-            />
+            <Image src={tmdbLogo} alt="TMDB logo" className="h-auto w-full" />
           </Link>
-          <p className="pt-2 text-center">
+          <p className="pt-2">
             This product uses the TMDB API but is not endorsed or certified by
             TMDB.
           </p>
