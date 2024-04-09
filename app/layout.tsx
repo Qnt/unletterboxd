@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/app/components/theme-provider';
 import { cn } from '@/app/lib/utils';
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
@@ -27,10 +28,17 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <div className="flex">
-          <Sidenav />
-          {children}
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex">
+            <Sidenav />
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

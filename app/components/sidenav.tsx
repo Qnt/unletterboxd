@@ -3,23 +3,25 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import Genres from './genres';
 import NavLinks from './nav-links';
+import { ThemeToggle } from './theme-toggle';
 
 export default function Sidenav() {
   return (
     <nav className="w-72 shrink-0 border-r">
       <div className="fixed inset-0 flex w-72 flex-col">
-        <div className="p-4 text-2xl font-bold">
+        <div className="flex gap-4 p-4 text-2xl font-bold">
           <Link href="/">TMDB Discovery</Link>
+          <ThemeToggle />
         </div>
         <hr />
         <div className="px-4 py-2">
-          <h3 className="text-lg">Discover</h3>
+          <p className="text-lg">Discover</p>
         </div>
         <NavLinks />
         <hr />
 
         <div className="px-4 py-2">
-          <h3 className="text-lg">Genres</h3>
+          <p className="text-lg">Genres</p>
         </div>
         <Suspense fallback={<p>Loading</p>}>
           <Genres />

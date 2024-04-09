@@ -1,26 +1,33 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { Movie } from '../lib/types';
+import { Card } from './ui/card';
 
 const MovieCard = async ({ movie }: { movie: Movie }) => {
   return (
-    <div className="flex max-w-48 flex-col">
-      <div>
+    <Card className="flex h-full w-full flex-col overflow-hidden shadow-md transition ease-in-out hover:-translate-y-1 hover:bg-accent">
+      <Link href="#" className="cursor-pointer">
         <Image
           src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
           width={500}
           height={200}
           alt={movie?.title ?? 'Movie title'}
         />
-      </div>
-      <div className="flex flex-col">
-        <p className="text-lg font-bold">{movie.title}</p>
-        <div className="flex flex-row justify-between">
+      </Link>
+      <div className="flex grow flex-col px-2 py-1">
+        <Link
+          href="#"
+          className="w-fit cursor-pointer text-base font-bold hover:text-blue-600"
+        >
+          {movie.title}
+        </Link>
+        <div className="flex flex-row justify-between text-sm ">
           <p>{movie.release_date?.split('-')[0]}</p>
           <p>{movie.vote_average.toFixed(1)} / 10</p>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
