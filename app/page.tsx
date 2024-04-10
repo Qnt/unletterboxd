@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import Movies from './components/movies';
+import { PaginationComponent } from './components/pagination';
 
 export default async function Home() {
   return (

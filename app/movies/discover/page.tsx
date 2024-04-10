@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 export default async function Page({
   searchParams,
 }: {
-  searchParams: MoviesDiscoverQuery;
+  searchParams?: MoviesDiscoverQuery;
 }) {
   return (
     <main className="h-full w-full">

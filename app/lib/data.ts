@@ -14,11 +14,17 @@ const options = {
 
 const client = createClient<paths>({ baseUrl: MAIN_BASE_URL, ...options });
 
-export const fetchMoviesPopular = async () => {
+export const fetchMoviesPopular = async (page?: number) => {
   try {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    const { data, error } = await client.GET('/3/movie/popular');
+    const { data, error } = await client.GET('/3/movie/popular', {
+      params: {
+        query: {
+          page,
+        },
+      },
+    });
     return data;
   } catch (error) {
     console.error(error);
@@ -26,11 +32,17 @@ export const fetchMoviesPopular = async () => {
   }
 };
 
-export const fetchMoviesTopRated = async () => {
+export const fetchMoviesTopRated = async (page?: number) => {
   try {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    const { data, error } = await client.GET('/3/movie/top_rated');
+    const { data, error } = await client.GET('/3/movie/top_rated', {
+      params: {
+        query: {
+          page,
+        },
+      },
+    });
     return data;
   } catch (error) {
     console.error(error);

@@ -5,6 +5,7 @@ import {
 } from '@/app/lib/data';
 import { MoviesDiscoverQuery } from '../lib/types';
 import MovieCard from './movie-card';
+import { PaginationComponent } from './pagination';
 
 export default async function Movies({
   searchParams,
@@ -16,11 +17,11 @@ export default async function Movies({
   let movies;
   switch (variant) {
     case 'popular': {
-      movies = await fetchMoviesPopular();
+      movies = await fetchMoviesPopular(searchParams?.page);
       break;
     }
     case 'top-rated': {
-      movies = await fetchMoviesTopRated();
+      movies = await fetchMoviesTopRated(searchParams?.page);
       break;
     }
     case 'discover': {
@@ -28,17 +29,25 @@ export default async function Movies({
       break;
     }
     default: {
-      movies = await fetchMoviesPopular();
+      movies = await fetchMoviesPopular(searchParams?.page);
     }
   }
 
   return (
-    <ul className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-3">
-      {movies?.results?.map((movie) => (
-        <li key={movie.id}>
-          <MovieCard movie={movie} />
-        </li>
-      ))}
-    </ul>
+    <>
+      {!movies?.results && <p>Nothing found</p>}
+      {movies?.results && (
+        <>
+          <ul className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-3">
+            {movies?.results?.map((movie) => (
+              <li key={movie.id}>
+                <MovieCard movie={movie} />
+              </li>
+            ))}
+          </ul>
+          <PaginationComponent totalPages={movies.total_pages} />
+        </>
+      )}
+    </>
   );
 }
