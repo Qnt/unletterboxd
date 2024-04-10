@@ -7,9 +7,15 @@ export type Movies =
 
 export type Genres =
   operations['genre-movie-list']['responses'][200]['content']['application/json']['genres'];
+export type Actors =
+  operations['movie-credits']['responses']['200']['content']['application/json']['cast'];
+export type CrewMembers =
+  operations['movie-credits']['responses']['200']['content']['application/json']['crew'];
 
 export type Movie = ArrayElement<Movies>;
 export type Genre = ArrayElement<Genres>;
+export type Actor = ArrayElement<Actors>;
+export type CrewMember = ArrayElement<CrewMembers>;
 
 export type LinkType = {
   name: string;

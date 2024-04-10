@@ -1,4 +1,4 @@
-import Cast from '@/app/components/movies/[id]/cast';
+import Credits from '@/app/components/movies/[id]/credits';
 import { fetchMovieDetails } from '@/app/lib/data';
 import { Movie } from '@/app/lib/types';
 import Image from 'next/image';
@@ -48,7 +48,7 @@ export default async function Page({
       </section>
       {/* Cast */}
       <Suspense fallback={<p>Loading...</p>}>
-        <Cast id={params.id} />
+        <Credits id={params.id} />
       </Suspense>
     </main>
   );
