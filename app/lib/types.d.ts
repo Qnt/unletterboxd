@@ -12,10 +12,16 @@ export type Actors =
 export type CrewMembers =
   operations['movie-credits']['responses']['200']['content']['application/json']['crew'];
 
+export type PersonImages =
+  operations['person-images']['responses']['200']['content']['application/json'];
+
 export type Movie = ArrayElement<Movies>;
 export type Genre = ArrayElement<Genres>;
 export type Actor = ArrayElement<Actors>;
 export type CrewMember = ArrayElement<CrewMembers>;
+
+export type Person =
+  operations['person-details']['responses']['200']['content']['application/json'];
 
 export type LinkType = {
   name: string;

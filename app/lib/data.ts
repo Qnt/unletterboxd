@@ -25,7 +25,7 @@ export const fetchMoviesPopular = async (page?: number) => {
         },
       },
     });
-    return data;
+    return data?.results;
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch data');
@@ -43,7 +43,7 @@ export const fetchMoviesTopRated = async (page?: number) => {
         },
       },
     });
-    return data;
+    return data?.results;
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch data');
@@ -61,7 +61,7 @@ export const fetchMoviesDiscover = async (
         query: searchParams,
       },
     });
-    return data;
+    return data?.results;
   } catch (error) {
     console.error(error);
     throw new Error('Failed to fetch data');
@@ -117,6 +117,63 @@ export const fetchMovieCredits = async (id: Movie['id']) => {
         },
       },
     });
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch data');
+  }
+};
+
+export const fetchPersonDetails = async (id: number) => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const { data, error } = await client.GET('/3/person/{person_id}', {
+      params: {
+        path: {
+          person_id: id,
+        },
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch data');
+  }
+};
+
+export const fetchPersonImages = async (id: number) => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const { data, error } = await client.GET('/3/person/{person_id}/images', {
+      params: {
+        path: {
+          person_id: id,
+        },
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch data');
+  }
+};
+
+export const fetchPersonCredits = async (id: number) => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const { data, error } = await client.GET(
+      '/3/person/{person_id}/movie_credits',
+      {
+        params: {
+          path: {
+            person_id: id,
+          },
+        },
+      },
+    );
     return data;
   } catch (error) {
     console.error(error);

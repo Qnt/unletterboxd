@@ -1,4 +1,5 @@
 import Movies from '@/app/components/movies';
+import { PaginationComponent } from '@/app/components/pagination';
 import { Suspense } from 'react';
 
 export default async function Page({
@@ -15,6 +16,7 @@ export default async function Page({
         <Suspense fallback={<p>Loading...</p>}>
           <Movies variant={'top-rated'} searchParams={searchParams} />
         </Suspense>
+        <PaginationComponent page={searchParams?.page} />
       </section>
     </main>
   );

@@ -13,13 +13,14 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 // Limited by TMDB API
 const TOTAL_PAGES = 500;
+const MOVIES_FOR_PAGE = 20;
 
-export function PaginationComponent() {
+export function PaginationComponent({ page }: { page?: number }) {
   const totalPages = TOTAL_PAGES;
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
-  const page = Number(searchParams.get('page')) || 1;
+  page = Number(page) || 1;
 
   const createUrl = (page: number) => {
     params.set('page', `${page}`);

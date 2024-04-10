@@ -21,6 +21,7 @@ export default async function Page({
             width={800}
             height={800}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="rounded-md"
           />
         </div>
         <div className="flex flex-col gap-4 ">
