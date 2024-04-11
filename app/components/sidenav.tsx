@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import Genres from './genres';
 import NavLinks from './nav-links';
-import { GenresSkeleton } from './skeletons';
 import { ThemeToggle } from './theme-toggle';
 
 export default function Sidenav() {
