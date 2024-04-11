@@ -13,7 +13,7 @@ export type CrewMembers =
   operations['movie-credits']['responses']['200']['content']['application/json']['crew'];
 
 export type PersonImages =
-  operations['person-images']['responses']['200']['content']['application/json'];
+  operations['person-images']['responses']['200']['content']['application/json']['profiles'];
 
 export type Movie = ArrayElement<Movies>;
 export type Genre = ArrayElement<Genres>;

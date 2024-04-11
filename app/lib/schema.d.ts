@@ -9936,7 +9936,43 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": Record<string, never>;
+                    "application/json": {
+                        /**
+                         * @default 0
+                         * @example 287
+                         */
+                        id: number;
+                        profiles?: {
+                            /**
+                             * @default 0
+                             * @example 0.666
+                             */
+                            aspect_ratio: number;
+                            /**
+                             * @default 0
+                             * @example 980
+                             */
+                            height: number;
+                            iso_639_1?: unknown;
+                            /** @example /cckcYc2v0yh1tc9QjRelptcOBko.jpg */
+                            file_path?: string;
+                            /**
+                             * @default 0
+                             * @example 5.288
+                             */
+                            vote_average: number;
+                            /**
+                             * @default 0
+                             * @example 89
+                             */
+                            vote_count: number;
+                            /**
+                             * @default 0
+                             * @example 653
+                             */
+                            width: number;
+                        }[];
+                    };
                 };
             };
         };
