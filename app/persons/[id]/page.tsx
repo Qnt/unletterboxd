@@ -1,8 +1,8 @@
 import Credits from '@/app/components/persons/[id]/credits';
 import Images from '@/app/components/persons/[id]/images';
-import { ScrollArea } from '@/app/components/ui/scroll-area';
 import { fetchPersonDetails } from '@/app/lib/data';
 import { getGender } from '@/app/lib/utils';
+import personIcon from '@/public/basic-user-icon.svg';
 import Image from 'next/image';
 import { Suspense } from 'react';
 
@@ -12,15 +12,23 @@ export default async function Page({ params }: { params: { id: number } }) {
     <main className="flex grow-0 flex-col gap-6 p-4">
       {/* Main details */}
       <section className="flex gap-4">
-        <div className="shrink-0 basis-80">
-          <Image
-            src={`https://image.tmdb.org/t/p/original${person?.profile_path}`}
-            alt="Profile picture"
-            width={800}
-            height={800}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="rounded-md"
-          />
+        <div className="flex aspect-[2/3] shrink-0 basis-80 flex-col">
+          {person?.profile_path ? (
+            <Image
+              src={`https://image.tmdb.org/t/p/original${person?.profile_path}`}
+              alt={person?.name ?? "Actor's profile picture"}
+              width={800}
+              height={800}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="rounded-md"
+            />
+          ) : (
+            <Image
+              src={personIcon}
+              alt={person?.name ?? "Actor's profile picture"}
+              className="my-auto h-auto w-full"
+            />
+          )}
         </div>
         <div className="flex flex-col gap-4 ">
           <header>

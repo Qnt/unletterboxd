@@ -1,6 +1,7 @@
 import Credits from '@/app/components/movies/[id]/credits';
 import { fetchMovieDetails } from '@/app/lib/data';
 import { Movie } from '@/app/lib/types';
+import movieIcon from '@/public/basic-movie-icon.svg';
 import Image from 'next/image';
 import { Suspense } from 'react';
 
@@ -14,15 +15,23 @@ export default async function Page({
     <main className="flex grow-0 flex-col gap-6 p-4">
       {/* Main details */}
       <section className="flex gap-4">
-        <div className="shrink-0 basis-80">
-          <Image
-            src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
-            alt="Movie poster"
-            width={800}
-            height={800}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="rounded-md"
-          />
+        <div className="flex aspect-[2/3] shrink-0 basis-80 flex-col">
+          {movie?.poster_path ? (
+            <Image
+              src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
+              alt="Movie poster"
+              width={800}
+              height={800}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="h-auto w-full rounded-md"
+            />
+          ) : (
+            <Image
+              src={movieIcon}
+              alt="Movie poster"
+              className="my-auto h-auto w-full"
+            />
+          )}
         </div>
         <div className="flex flex-col gap-4 ">
           <header>
