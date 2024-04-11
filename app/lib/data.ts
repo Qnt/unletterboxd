@@ -16,7 +16,7 @@ const client = createClient<paths>({ baseUrl: MAIN_BASE_URL, ...options });
 
 export const fetchMoviesPopular = async (page?: number) => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const { data, error } = await client.GET('/3/movie/popular', {
       params: {
@@ -34,7 +34,7 @@ export const fetchMoviesPopular = async (page?: number) => {
 
 export const fetchMoviesTopRated = async (page?: number) => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const { data, error } = await client.GET('/3/movie/top_rated', {
       params: {
@@ -54,7 +54,7 @@ export const fetchMoviesDiscover = async (
   searchParams: MoviesDiscoverQuery,
 ) => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 4000));
 
     const { data, error } = await client.GET('/3/discover/movie', {
       params: {
@@ -70,6 +70,8 @@ export const fetchMoviesDiscover = async (
 
 export const fetchGenres = async () => {
   try {
+    // await new Promise((resolve) => setTimeout(resolve, 4000));
+
     const { data, error } = await client.GET('/3/genre/movie/list');
     return data?.genres;
   } catch (error) {
@@ -90,7 +92,7 @@ export const fetchConfigDetails = async () => {
 
 export const fetchMovieDetails = async (id: Movie['id']) => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const { data, error } = await client.GET('/3/movie/{movie_id}', {
       params: {
@@ -108,7 +110,7 @@ export const fetchMovieDetails = async (id: Movie['id']) => {
 
 export const fetchMovieCredits = async (id: Movie['id']) => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 4000));
 
     const { data, error } = await client.GET('/3/movie/{movie_id}/credits', {
       params: {
@@ -126,7 +128,7 @@ export const fetchMovieCredits = async (id: Movie['id']) => {
 
 export const fetchPersonDetails = async (id: number) => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const { data, error } = await client.GET('/3/person/{person_id}', {
       params: {
@@ -144,7 +146,7 @@ export const fetchPersonDetails = async (id: number) => {
 
 export const fetchPersonImages = async (id: number) => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 4000));
 
     const { data, error } = await client.GET('/3/person/{person_id}/images', {
       params: {
@@ -162,7 +164,7 @@ export const fetchPersonImages = async (id: number) => {
 
 export const fetchPersonCredits = async (id: number) => {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const { data, error } = await client.GET(
       '/3/person/{person_id}/movie_credits',

@@ -19,10 +19,9 @@ const MovieCard = async ({ movie }: { movie: Movie }) => {
           {movie?.poster_path ? (
             <Image
               src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
-              width={500}
-              height={500}
+              width={300}
+              height={300}
               alt={movie?.title ?? 'Movie title'}
-              priority={true}
             />
           ) : (
             <Image
@@ -40,10 +39,10 @@ const MovieCard = async ({ movie }: { movie: Movie }) => {
           </CardTitle>
         </Link>
         <CardDescription className="flex flex-row justify-between text-sm ">
-          <p>
+          <span>
             {movie.release_date ? movie.release_date?.split('-')[0] : 'TBA'}
-          </p>
-          <p>{movie.vote_average.toFixed(1)} / 10</p>
+          </span>
+          <span>{movie.vote_average.toFixed(1)} / 10</span>
         </CardDescription>
       </CardHeader>
     </Card>

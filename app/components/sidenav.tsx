@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import Genres from './genres';
 import NavLinks from './nav-links';
+import { GenresSkeleton } from './skeletons';
 import { ThemeToggle } from './theme-toggle';
 
 export default function Sidenav() {
@@ -23,10 +24,10 @@ export default function Sidenav() {
       <div className="px-4 py-2">
         <p className="text-lg">Genres</p>
       </div>
-      <Suspense fallback={<p>Loading</p>}>
+      <Suspense fallback={<p className="text-center">loading...</p>}>
         <Genres />
       </Suspense>
-      <div className="flex items-center gap-4 px-4 pb-4 pt-8">
+      <div className="mt-auto flex items-center gap-4 px-4 pb-4 pt-8">
         <Link href="https://www.themoviedb.org">
           <Image src={tmdbLogo} alt="TMDB logo" className="h-auto w-full" />
         </Link>

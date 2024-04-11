@@ -1,8 +1,17 @@
 import { fetchPersonCredits } from '@/app/lib/data';
+import { unique } from 'next/dist/build/utils';
 import Movies from '../../movies';
 
 export default async function Credits({ id }: { id: number }) {
   const credits = await fetchPersonCredits(id);
+
+  let unique = credits?.crew;
+  if (credits?.crew) {
+    unique = credits.crew.filter(
+      (movie, i, self) => i === self.findIndex((t) => t.id === movie.id),
+    );
+  }
+
   return (
     <>
       {!credits ? (
@@ -19,7 +28,7 @@ export default async function Credits({ id }: { id: number }) {
           {credits?.crew && (
             <>
               <h2 className="text-lg font-bold">Crew</h2>
-              <Movies movies={credits.crew} />
+              <Movies movies={unique} />
             </>
           )}
         </section>

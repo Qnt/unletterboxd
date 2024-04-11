@@ -5,7 +5,6 @@ import {
 } from '@/app/lib/data';
 import { MoviesDiscoverQuery, Movies as MoviesType } from '../lib/types';
 import MovieCard from './movie-card';
-import { PaginationComponent } from './pagination';
 
 export default async function Movies({
   searchParams,
