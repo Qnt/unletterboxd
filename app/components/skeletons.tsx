@@ -60,3 +60,7 @@ export function PersonImagesSkeleton() {
     </>
   );
 }
+
+export function TitleSkeleton() {
+  return <Skeleton className="h-8 w-48" />;
+}
