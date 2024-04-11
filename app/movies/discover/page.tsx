@@ -1,8 +1,8 @@
 import Movies from '@/app/components/movies';
 import { PaginationComponent } from '@/app/components/pagination';
+import { MoviesSkeleton } from '@/app/components/skeletons';
 import { MoviesDiscoverQuery } from '@/app/lib/types';
 import { Suspense } from 'react';
-import Loading from './loading';
 
 export default async function Page({
   searchParams,
@@ -15,7 +15,7 @@ export default async function Page({
         <p className="text-2xl font-bold">Top Rated</p>
         <Suspense
           key={`${searchParams?.with_genres}&${searchParams?.page}`}
-          fallback={<Loading />}
+          fallback={<MoviesSkeleton />}
         >
           <Movies searchParams={searchParams} variant="discover" />
         </Suspense>
