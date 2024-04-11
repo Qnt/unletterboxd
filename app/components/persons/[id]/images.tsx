@@ -6,14 +6,12 @@ export default async function Images({ id }: { id: number }) {
   const images = await fetchPersonImages(id);
   return (
     <>
-      {!images ? (
-        <></>
-      ) : (
+      {images?.profiles && (
         <section className="flex flex-col gap-4">
           <h2 className="text-lg font-bold">Images</h2>
           <ScrollArea className="w-full whitespace-nowrap">
             <div className="flex space-x-4 pb-3">
-              {images?.profiles.map((image: { file_path: any }) => (
+              {images?.profiles.map((image) => (
                 <Image
                   key={image.file_path}
                   src={`https://image.tmdb.org/t/p/original${image.file_path}`}
