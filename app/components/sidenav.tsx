@@ -10,7 +10,7 @@ export default function Sidenav() {
   return (
     <nav className="fixed inset-0 flex w-72 flex-col border-r">
       <div className="flex gap-4 p-4 text-2xl font-bold">
-        <Link href="/">TMDB Discovery</Link>
+        <Link href="/">Unletterboxd</Link>
         <ThemeToggle />
       </div>
       <hr />
