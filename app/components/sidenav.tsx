@@ -4,14 +4,12 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import Genres from './genres';
 import NavLinks from './nav-links';
-import { ThemeToggle } from './theme-toggle';
 
 export default function Sidenav() {
   return (
-    <nav className="fixed inset-0 flex w-72 flex-col border-r">
-      <div className="flex gap-4 p-4 text-2xl font-bold">
+    <nav className="fixed inset-0 flex w-64 flex-col border-r">
+      <div className="flex gap-4 p-4 text-4xl font-bold">
         <Link href="/">Unletterboxd</Link>
-        <ThemeToggle />
       </div>
       <hr />
       <div className="px-4 py-2">
