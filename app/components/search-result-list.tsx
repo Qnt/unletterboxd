@@ -7,9 +7,11 @@ import { Card } from './ui/card';
 export default function SearchResultList({
   movies = [],
   isFoundNothing,
+  isSearching,
 }: {
   movies: Movies;
   isFoundNothing: boolean;
+  isSearching: boolean;
 }) {
   const router = useRouter();
 
@@ -23,19 +25,18 @@ export default function SearchResultList({
   };
 
   return (
-    <Card
-      onClick={(ev) => handleClick(ev)}
-      className="absolute left-0 top-12 flex w-full flex-col overflow-auto bg-background text-base shadow-md"
-    >
-      {isFoundNothing ? (
+    <>
+      {isSearching ? (
+        <p className="self-center p-4">Searching...</p>
+      ) : isFoundNothing ? (
         <p className="self-center p-4">No results found.</p>
       ) : (
-        <ul>
+        <ul onClick={(ev) => handleClick(ev)}>
           {movies
             ?.slice(0, 6)
             .map((movie) => <SearchItem key={movie.id} movie={movie} />)}
         </ul>
       )}
-    </Card>
+    </>
   );
 }

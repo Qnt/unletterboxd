@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { Movies } from '../lib/types';
 import SearchResultList from './search-result-list';
 import { Button } from './ui/button';
+import { Card } from './ui/card';
 import { Input } from './ui/input';
 
 export default function SearchBar({
@@ -13,8 +14,9 @@ export default function SearchBar({
   search: (query: string) => Promise<Movies>;
 }) {
   const [movies, setMovies] = useState<Movies>([]);
-  const [query, setQuery] = useState('');
+  const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const [isFoundNothing, setIsFoundNothing] = useState(false);
 
   const handleSumbit = (ev: React.FormEvent) => {
@@ -25,7 +27,9 @@ export default function SearchBar({
     setIsTyping(true);
     let data = [] as Movies;
     if (query.trim().length > 0) {
+      setIsSearching(true);
       data = await search(query);
+      setIsSearching(false);
       setIsFoundNothing(!data?.length);
     }
     setMovies(data);
@@ -46,16 +50,22 @@ export default function SearchBar({
           placeholder="Search movies"
           maxLength={100}
           required
-          value={query}
+          value={input}
           onInput={(ev) => {
-            setQuery(ev.currentTarget.value);
+            setInput(ev.currentTarget.value);
             handleInput(ev.currentTarget.value);
           }}
           onBlur={useDebouncedCallback(() => setIsTyping(false), 300)}
           onFocus={() => setIsTyping(true)}
         />
         {isTyping && (
-          <SearchResultList movies={movies} isFoundNothing={isFoundNothing} />
+          <Card className="absolute left-0 top-12 flex w-full flex-col overflow-auto bg-background text-base shadow-md">
+            <SearchResultList
+              movies={movies}
+              isFoundNothing={isFoundNothing}
+              isSearching={isSearching}
+            />
+          </Card>
         )}
       </div>
       <Button type="submit">Search</Button>
