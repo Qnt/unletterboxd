@@ -1,6 +1,7 @@
 'use client';
 
 import { LoaderCircle } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { Movies } from '../lib/types';
@@ -18,23 +19,36 @@ export default function SearchBar({
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const [isFoundNothing, setIsFoundNothing] = useState(false);
+  const [isFoundMovies, setIsFoundMovies] = useState(false);
+  const router = useRouter();
 
   const handleSumbit = (ev: React.FormEvent) => {
     ev.preventDefault();
+    const searchParams = new URLSearchParams({ searchQuery: input });
+    router.push(`/search?${searchParams}`);
   };
 
   const handleInput = useDebouncedCallback(async (query: string) => {
-    setIsTyping(true);
     let data = [] as Movies;
     if (query.trim().length > 0) {
+      setIsTyping(true);
       setIsSearching(true);
-      data = await search(query);
+      data = (await search(query)) ?? [];
       setIsSearching(false);
-      setIsFoundNothing(!data?.length);
+    } else {
+      setIsTyping(false);
     }
-    setMovies(data);
+    if (data) {
+      setMovies(data);
+      setIsFoundMovies(data.length > 0);
+    }
   }, 300);
+
+  const handleFocus = (query: string) => {
+    if (query.trim().length > 0) {
+      setIsTyping(true);
+    }
+  };
 
   return (
     <form
@@ -57,11 +71,11 @@ export default function SearchBar({
             handleInput(ev.currentTarget.value);
           }}
           onBlur={useDebouncedCallback(() => setIsTyping(false), 300)}
-          onFocus={() => setIsTyping(true)}
+          onFocus={(ev) => handleFocus(ev.currentTarget.value)}
         />
         {isTyping && (
           <Card className="absolute left-0 top-12 flex w-full flex-col overflow-auto bg-background text-base shadow-md">
-            {!isFoundNothing && !isSearching && (
+            {isFoundMovies && !isSearching && (
               <SearchResultList movies={movies} />
             )}
             {isSearching && (
@@ -69,8 +83,8 @@ export default function SearchBar({
                 <LoaderCircle className="animate-spin" />
               </div>
             )}
-            {isFoundNothing && !isSearching && (
-              <p className="self-center p-4">No results found.</p>
+            {!isFoundMovies && !isSearching && (
+              <p className="self-center p-4 font-bold">No results found.</p>
             )}
           </Card>
         )}

@@ -2,8 +2,9 @@ import {
   fetchMoviesDiscover,
   fetchMoviesPopular,
   fetchMoviesTopRated,
+  searchMovie,
 } from '@/app/lib/data';
-import { MoviesDiscoverQuery, Movies as MoviesType } from '../lib/types';
+import { Movies as MoviesType } from '../lib/types';
 import MovieCard from './movie-card';
 
 export default async function Movies({
@@ -11,8 +12,8 @@ export default async function Movies({
   variant,
   movies,
 }: {
-  searchParams?: MoviesDiscoverQuery;
-  variant?: 'popular' | 'top-rated' | 'discover';
+  searchParams: { page?: number; searchQuery: string };
+  variant?: 'popular' | 'top-rated' | 'discover' | 'search';
   movies?: MoviesType;
 }) {
   if (!movies) {
@@ -29,6 +30,11 @@ export default async function Movies({
         movies = await fetchMoviesDiscover(searchParams);
         break;
       }
+      case 'search': {
+        movies = await searchMovie(searchParams.searchQuery);
+        break;
+      }
+
       default: {
         movies = await fetchMoviesPopular(searchParams?.page);
       }
