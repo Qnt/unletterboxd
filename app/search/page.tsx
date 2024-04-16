@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import Movies from '../components/movies';
 import { PaginationComponent } from '../components/pagination';
@@ -8,6 +9,9 @@ export default async function Page({
 }: {
   searchParams: { searchQuery: string; page?: number };
 }) {
+  if (!searchParams.searchQuery) {
+    redirect('/');
+  }
   return (
     <main className="h-full w-full">
       <section className=" flex w-full flex-col gap-4 p-4">

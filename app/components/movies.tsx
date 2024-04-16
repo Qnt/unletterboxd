@@ -31,7 +31,7 @@ export default async function Movies({
         break;
       }
       case 'search': {
-        movies = await searchMovie(searchParams.searchQuery);
+        movies = await searchMovie(searchParams);
         break;
       }
 

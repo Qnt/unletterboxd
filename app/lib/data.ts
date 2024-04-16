@@ -183,14 +183,21 @@ export const fetchPersonCredits = async (id: number) => {
   }
 };
 
-export const searchMovie = async (query: string) => {
+export const searchMovie = async ({
+  searchQuery,
+  page,
+}: {
+  searchQuery: string;
+  page?: number;
+}) => {
   try {
     // await new Promise((resolve) => setTimeout(resolve, 8000));
 
     const { data, error } = await client.GET('/3/search/movie', {
       params: {
         query: {
-          query,
+          query: searchQuery,
+          page,
         },
       },
     });

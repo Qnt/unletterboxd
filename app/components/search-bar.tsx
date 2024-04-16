@@ -13,7 +13,13 @@ import { Input } from './ui/input';
 export default function SearchBar({
   search,
 }: {
-  search: (query: string) => Promise<Movies>;
+  search: ({
+    searchQuery,
+    page,
+  }: {
+    searchQuery: string;
+    page?: number;
+  }) => Promise<Movies>;
 }) {
   const [movies, setMovies] = useState<Movies>([]);
   const [input, setInput] = useState('');
@@ -33,7 +39,7 @@ export default function SearchBar({
     if (query.trim().length > 0) {
       setIsTyping(true);
       setIsSearching(true);
-      data = (await search(query)) ?? [];
+      data = (await search({ searchQuery: query })) ?? [];
       setIsSearching(false);
     } else {
       setIsTyping(false);
