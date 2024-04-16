@@ -200,23 +200,3 @@ export const searchMovie = async (query: string) => {
     throw new Error('Failed to fetch data');
   }
 };
-
-const debouncer = <T extends (...args: any[]) => ReturnType<T>>(
-  callee: T,
-  delay: number,
-): ((...args: Parameters<T>) => Promise<ReturnType<T>>) => {
-  let timeoutId: ReturnType<typeof setTimeout>;
-  return (...args: Parameters<T>): Promise<ReturnType<T>> => {
-    return new Promise((resolve, reject) => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        try {
-          const result = callee(...args);
-          resolve(result);
-        } catch (error) {
-          reject(error);
-        }
-      }, delay);
-    });
-  };
-};
