@@ -64,7 +64,6 @@ export default function SearchBar({
             {!isFoundNothing && !isSearching && (
               <SearchResultList movies={movies} />
             )}
-            {/* {isSearching && <p className="self-center p-4">Searching...</p>} */}
             {isSearching && (
               <div className="self-center p-4">
                 <LoaderCircle className="animate-spin" />
