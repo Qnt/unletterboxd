@@ -1,5 +1,6 @@
 'use client';
 
+import { LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { Movies } from '../lib/types';
@@ -60,11 +61,18 @@ export default function SearchBar({
         />
         {isTyping && (
           <Card className="absolute left-0 top-12 flex w-full flex-col overflow-auto bg-background text-base shadow-md">
-            <SearchResultList
-              movies={movies}
-              isFoundNothing={isFoundNothing}
-              isSearching={isSearching}
-            />
+            {!isFoundNothing && !isSearching && (
+              <SearchResultList movies={movies} />
+            )}
+            {/* {isSearching && <p className="self-center p-4">Searching...</p>} */}
+            {isSearching && (
+              <div className="self-center p-4">
+                <LoaderCircle className="animate-spin" />
+              </div>
+            )}
+            {isFoundNothing && !isSearching && (
+              <p className="self-center p-4">No results found.</p>
+            )}
           </Card>
         )}
       </div>
