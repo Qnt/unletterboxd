@@ -2,13 +2,12 @@ import GenreTitle from '@/app/components/genre-title';
 import Movies from '@/app/components/movies';
 import { PaginationComponent } from '@/app/components/pagination';
 import { MoviesSkeleton, TitleSkeleton } from '@/app/components/skeletons';
-import { MoviesDiscoverQuery } from '@/app/lib/types';
 import { Suspense } from 'react';
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: MoviesDiscoverQuery;
+  searchParams?: { with_genres: string; page?: number };
 }) {
   return (
     <main className="h-full w-full">

@@ -12,7 +12,7 @@ export default async function Movies({
   variant,
   movies,
 }: {
-  searchParams: { page?: number; searchQuery: string };
+  searchParams?: { page?: number; searchQuery?: string; with_genres?: string };
   variant?: 'popular' | 'top-rated' | 'discover' | 'search';
   movies?: MoviesType;
 }) {
@@ -27,11 +27,18 @@ export default async function Movies({
         break;
       }
       case 'discover': {
-        movies = await fetchMoviesDiscover(searchParams);
+        if (searchParams) {
+          movies = await fetchMoviesDiscover(searchParams);
+        }
         break;
       }
       case 'search': {
-        movies = await searchMovie(searchParams);
+        if (searchParams && searchParams.searchQuery) {
+          movies = await searchMovie({
+            page: searchParams.page,
+            searchQuery: searchParams.searchQuery,
+          });
+        }
         break;
       }
 

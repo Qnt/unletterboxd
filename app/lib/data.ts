@@ -50,15 +50,22 @@ export const fetchMoviesTopRated = async (page?: number) => {
   }
 };
 
-export const fetchMoviesDiscover = async (
-  searchParams: MoviesDiscoverQuery,
-) => {
+export const fetchMoviesDiscover = async ({
+  page,
+  with_genres,
+}: {
+  page?: number;
+  with_genres?: string;
+}) => {
   try {
     // await new Promise((resolve) => setTimeout(resolve, 4000));
 
     const { data, error } = await client.GET('/3/discover/movie', {
       params: {
-        query: searchParams,
+        query: {
+          page,
+          with_genres,
+        },
       },
     });
     return data?.results;
